@@ -3,14 +3,7 @@ package com.fatec.sp.ex2.pratica2CesarSantos.model;
 import java.time.LocalDate;
 import java.util.List;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "USU_USUARIO")
@@ -21,7 +14,7 @@ public class Usuario {
     @Column(name = "USU_ID")
 	private Integer id;
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "usuario", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<Endereco> enderecos;
 	 
 	@Column(name = "USU_NOME", length = 50, nullable = false)
