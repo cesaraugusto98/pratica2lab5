@@ -8,14 +8,22 @@ import javax.persistence.*;
 @Entity
 @Table(name = "USU_USUARIO")
 public class Usuario {
+
+	public Usuario() {}
+
+	public Usuario(String nome, String login, Integer senha, LocalDate dataNascimento, String cpf, List<Endereco> enderecos) {
+		this.nome = nome;
+		this.login = login;
+		this.senha = senha;
+		this.dataNascimento = dataNascimento;
+		this.cpf = cpf;
+		this.enderecos = enderecos;
+	}
 	
 	@Id 
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name = "USU_ID")
 	private Integer id;
-
-	@OneToMany(mappedBy = "usuario", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	private List<Endereco> enderecos;
 	 
 	@Column(name = "USU_NOME", length = 50, nullable = false)
     private String nome;
@@ -31,7 +39,9 @@ public class Usuario {
 
 	@Column(name = "USU_CPF", length = 11, nullable = true)
     private String cpf;
-	
+
+	@OneToMany(mappedBy = "usuario", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	private List<Endereco> enderecos;
 
 	public Integer getId() {
 		return id;
@@ -88,5 +98,4 @@ public class Usuario {
 	public void setCpf(String cpf) {
 		this.cpf = cpf;
 	}
-	
 }

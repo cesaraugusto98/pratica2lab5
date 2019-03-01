@@ -5,6 +5,15 @@ import javax.persistence.*;
 @Entity
 @Table(name = "END_ENDERECO")
 public class Endereco {
+
+	public Endereco(String cep, String bairro, String municipio, String uf, String numero, String complemento) {
+		this.cep = cep;
+		this.bairro = bairro;
+		this.municipio = municipio;
+		this.uf = uf;
+		this.numero = numero;
+		this.complemento = complemento;
+	}
 	
 	@Id 
     @GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -29,7 +38,7 @@ public class Endereco {
 	@Column(name = "END_COMPLEMENTO", length = 50, nullable = true)
     private String complemento;
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "usu_id")
 	private Usuario usuario;
 
